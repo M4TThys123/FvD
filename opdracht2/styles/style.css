@@ -1,27 +1,126 @@
-/* CSS Document */
-
-/* FONTS */
-@font-face {
-	font-family: 'eenfont';
-	src: url('../fonts/eenfont.woff2') format('woff2'),
-			 url('../fonts/eenfont.woff') format('woff');
-	font-weight: normal;
-	font-style: normal;
-
+/* ALGEMENE STYLING */
+*, *::after, *::before{
+	box-sizing:border-box; 
+	margin: 0;
+	padding: 0;
+	font-family: 'Helvetica Neue';
 }
 
+ /* light theme */
+ :root{
+	--Achtergrondkleur:#9F9F9F;
+	--Accentkleur: #40A79B;
+	--Header: #3A93AD;
+	--Galaxy: #3A93AD;
+	--Solar: #E3C059;
+	--Lunar: #B63F45;
+	--Textbox: #FFFFFF;
+	--Wit: #ffffff; 
 
-/* ALGEMENE STYLING */
-*, *::after, *::before {
-  box-sizing:border-box;  
+	/* gradient kleuren */
+	--Kleur1: hsla(198, 44%, 11%, 0.95);
+	--Kleur2: hsla(195, 35%, 19%, 0.80);
+	--Kleur3: hsla(198, 39%, 28%, 0.650);
+}
+/* dark theme */
+@media (prefers-color-scheme:dark) {
+	:root {
+	--Achtergrondkleur:#181C20;
+	--Accentkleur: #40A79B;
+	--Header: #3A93AD;
+	--Galaxy: #3A93AD;
+	--Solar: #E3C059;
+	--Lunar: #B63F45;
+	--Textbox: #282C30;
+	--Wit: #A8ACB0;
+	}
+}
+/* Achtergrondkleur #000000 opaciti 30%
+Accentkleur/ Header #40A79B
+Galaxy #3A93AD
+Solar #E3C059
+Lunar #B63F45
+Textbox #FFFFFF border #000000   */
+
+h1{
+	color: var(--Wit);
+}
+p{
+	color: var(--Wit);
 }
 
 body {
-  font-family:eenfont, sans-serif;
-  color:#111;
-  background-color:#eee;
+	background-color: var(--Achtergrondkleur);
 }
 
+header{
+	background-color: var(--Header);
+	width: 100%;
+	height: 90px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	flex-direction: column;
+}
+header section{
+	margin: 1em;
+	display: flex;
+	flex-direction: row;
+}
+/* .niet-zichtbaar {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+  } */
 
-/* BRAND STYLING */
+  /* Filter functie */
+  ul.galaxy li:not(.galaxy) {
+	display:none;
+  }
+  
+  ul.solar li:not(.solar) {
+	display:none;
+  }
 
+  .all{
+	  
+  }
+
+
+header h1{
+	background-color: var(--Accentkleur);
+	width: 100%;
+	height: 5em;
+	align-items: center;
+	justify-content: center;
+
+}
+ul{
+	display: grid;
+	justify-content: center;
+	grid-gap: 1em;
+	margin-top: 1em;
+	list-style-type: none;
+}
+li{
+	width: 315px;
+	height: 315px;
+}
+
+li:hover,li:focus{
+	color: red; 
+}
+li:nth-of-type(1){
+	background: 
+	url(images/Muzzy.svg);
+}
+
+li:nth-of-type(2){
+	background: linear-gradient(135deg, var(--Kleur1), var(--Kleur2), var(--Kleur3)),
+	url(images/Muzzy.svg);
+}

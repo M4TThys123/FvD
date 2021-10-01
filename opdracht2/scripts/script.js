@@ -19,3 +19,5 @@ function filterLijst(event){
 optieAll.addEventListener("change", filterLijst);
 optieGalaxy.addEventListener("change", filterLijst);
 optieSolar.addEventListener("change", filterLijst);
+
+

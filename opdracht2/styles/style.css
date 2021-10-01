@@ -15,42 +15,26 @@
 	--Solar: #E3C059;
 	--Lunar: #B63F45;
 	--Textbox: #FFFFFF;
-	--Wit: #ffffff; 
-
-	/* gradient kleuren */
-	--Kleur1: hsla(198, 44%, 11%, 0.95);
-	--Kleur2: hsla(195, 35%, 19%, 0.80);
-	--Kleur3: hsla(198, 39%, 28%, 0.650);
+	--Textkleur: #ffffff; 	
 }
 /* dark theme */
 @media (prefers-color-scheme:dark) {
 	:root {
 	--Achtergrondkleur:#181C20;
-	--Accentkleur: #40A79B;
-	--Header: #3A93AD;
-	--Galaxy: #3A93AD;
-	--Solar: #E3C059;
-	--Lunar: #B63F45;
 	--Textbox: #282C30;
-	--Wit: #A8ACB0;
+	/* --Textkleur: #A8ACB0; */
 	}
 }
-/* Achtergrondkleur #000000 opaciti 30%
-Accentkleur/ Header #40A79B
-Galaxy #3A93AD
-Solar #E3C059
-Lunar #B63F45
-Textbox #FFFFFF border #000000   */
-
 h1{
-	color: var(--Wit);
+	color: var(--Textkleur);
 }
 p{
-	color: var(--Wit);
+	color: var(--Textkleur);
 }
 
 body {
 	background-color: var(--Achtergrondkleur);
+	line-height: 1.6;
 }
 
 header{
@@ -63,11 +47,154 @@ header{
 	text-align: center;
 	flex-direction: column;
 }
+
 header section{
 	margin: 1em;
 	display: flex;
 	flex-direction: row;
 }
+
+header h1{
+	background-color: var(--Accentkleur);
+	width: 100%;
+	height: 5em;
+	align-items: center;
+	justify-content: center;
+
+}
+
+label{
+	background: var(--Accentkleur);
+	border: 1px solid var(--Textkleur);
+	border-radius: 3px;
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	cursor: pointer;
+	color: var(--Textkleur);
+	width: 110px;
+}
+
+label:nth-of-type(2){
+	background: var(--Galaxy);
+}
+
+label:nth-of-type(3){
+	background: var(--Solar);
+}
+
+label.active{
+	background: var(--Lunar);
+}
+
+
+input{
+	overflow: hidden;
+}
+main{
+	display: flex;
+	margin: 0 50%;
+	justify-content:center;
+	align-items:center;
+}
+ul{
+	display: grid;
+	grid-template-columns: repeat(1, minmax(315px, 592px));
+	justify-content: center;
+	grid-gap: 2.5em;
+	margin-top: 1em;
+	list-style-type: none;
+}
+
+@media(min-width: 720px) {
+    ul {	grid-template-columns: repeat(2, minmax(315px, 592px));
+	}}
+@media(min-width: 1190px) {
+	ul {	grid-template-columns: repeat(3, minmax(315px, 592px));
+	}}
+
+li{
+	color: var(--Textkleur);
+	background: linear-gradient(135deg, var(--Kleur1), var(--Kleur2), var(--Kleur3)),;
+	background-size: cover;
+	padding: 1rem 0 0;
+	width: 315px;
+	height: 315px;
+	border-radius: .5rem;
+	overflow: hidden;
+	transition: transform 500ms ease;
+}
+
+li:hover, li:focus-within, li:focus {
+	transform: scale(1.025);
+}
+
+.card-content{
+	padding: .5em;
+	height: 100%;
+	background: black;
+	background: linear-gradient(
+	hsl(0 0% 0% / 0),
+	hsl(0 0% 0% / .3) 5%,
+	hsl(0 0% 0% / 1)
+	);
+
+}
+
+.card-title{
+	position: relative;
+	width: max-content;
+
+}
+
+.card-title::after{
+	content: "";
+	position: absolute;
+	height: 5px;
+	left: -.5rem;
+	bottom: 2px;
+	width: calc(100% + .5em);
+	background: var(--Solar);
+	transform-origin: left;
+	transition: transform 500ms ease;
+}
+.galaxy .card-title::after{
+	content: "";
+	background: var(--Galaxy);
+}
+
+li:hover .card-title::after, li:focus-within .card-title::after, li:focus.card-title::after{
+	transform: scaleX(1) ;
+}
+
+.galaxy span{
+	color: var(--Galaxy);
+}
+
+.solar span{
+	color: var(--Solar);
+}
+
+
+li iframe:hover, li iframe:focus{
+	border: var(--Accentkleur) 2px solid;}
+
+
+
+
+
+
+/* Filter functie */
+ul.galaxy li:not(.galaxy) {
+	display:none;
+  }
+  
+  ul.solar li:not(.solar) {
+	display:none;
+  }
+
+  
+
 /* .niet-zichtbaar {
 	clip: rect(0 0 0 0);
 	clip-path: inset(50%);
@@ -78,49 +205,99 @@ header section{
 	width: 1px;
   } */
 
-  /* Filter functie */
-  ul.galaxy li:not(.galaxy) {
-	display:none;
+  @media (any-pointer){
+	.card-content{
+		transform: translateY(80%);
+		transition: transform 500ms ease;
+	}
+	li:hover .card-content, li:focus-within .card-content, li:focus .card-content {
+		transform: translateY(0%);
+		transition-delay: 500ms;
+	}
+	
+	li:focus-within .card-content, li:focus .card-content{
+		transition-duration: 0ms;
+	}
+	
+	.card-content > :not(.card-title){
+		opacity: 0;
+		transition: opacity 500ms linear;
+	}
+	
+	li:hover .card-content > :not(.card-title), li:focus .card-content > :not(.card-title){
+		opacity: 1;
+		transition-delay: 750ms;
+	}
+	
+	li:focus-within .card-content > :not(.card-title), li:focus .card-content > :not(.card-title){
+		opacity: 1;
+	}
+	.card-title::after{
+		transform: scaleX(0);
+	}
+
+	/* bron: https://www.youtube.com/watch?v=5DEq5cWNYt8&list=PLHKmWE4zWLGyVosCWlIB-5FxMfMHP0ptI&index=2 */
+}
+@media (preferes-reduced-motion: reduce)
+{
+	*,*::before, *::after{
+		animation-duration: 0.01ms  !important;
+		animation-iteration-count: 0.01ms  !important;
+		transition-duration: 0.01ms  !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+li:nth-of-type(1){
+	background: url(images/muzz.svg);
+}
+li:nth-of-type(2){
+	background: url(images/prototypes.svg);
+}
+li:nth-of-type(3){
+	background: url(images/doctor.svg);
+}
+li:nth-of-type(4){
+	background: url(images/hedex.svg);
+}
+li:nth-of-type(5){
+	background: url(images/pendulum.svg);
+}
+li:nth-of-type(6){
+	background: url(images/moski.svg);
+}
+li:nth-of-type(7){
+	background: url(images/nymfo.svg);
+}
+li:nth-of-type(8){
+	background: url(images/high-contrast.svg);
+}
+li:nth-of-type(9){
+	background: url(images/k-motion.svg);
+}
+li:nth-of-type(10){
+	background: url(images/kanine.svg);
+}
+li:nth-of-type(11){
+	background: url(images/urbandawn.svg);
+}
+li:nth-of-type(12){
+	background: url(images/macky-gee.svg);
+}
+
+/* Voor mensen die geen animaties willen */
+/* bron https://codepen.io/kevinpowell/pen/YzqerQm */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	::before,
+	::after {
+	  animation-delay: -1ms !important;
+	  animation-duration: 1ms !important;
+	  animation-iteration-count: 1 !important;
+	  background-attachment: initial !important;
+	  scroll-behavior: auto !important;
+	  transition-duration: 0s !important;
+	  transition-delay: 0s !important;
+	}
   }
   
-  ul.solar li:not(.solar) {
-	display:none;
-  }
-
-  .all{
-	  
-  }
-
-
-header h1{
-	background-color: var(--Accentkleur);
-	width: 100%;
-	height: 5em;
-	align-items: center;
-	justify-content: center;
-
-}
-ul{
-	display: grid;
-	justify-content: center;
-	grid-gap: 1em;
-	margin-top: 1em;
-	list-style-type: none;
-}
-li{
-	width: 315px;
-	height: 315px;
-}
-
-li:hover,li:focus{
-	color: red; 
-}
-li:nth-of-type(1){
-	background: 
-	url(images/Muzzy.svg);
-}
-
-li:nth-of-type(2){
-	background: linear-gradient(135deg, var(--Kleur1), var(--Kleur2), var(--Kleur3)),
-	url(images/Muzzy.svg);
-}
